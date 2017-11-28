@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { getMetricMetaInfo, timeToString } from '../utils/helpers'
-import Slider from './Slider'
-import Stepper from './Stepper'
+import MySlider from './MySlider'
+import MyStepper from './MyStepper'
 import DateHeader from './DateHeader'
+import TextButton from './TextButton'
+import { Ionicons } from '@expo/vector-icons'
 
 function SubmitBtn ({ onPress }) {
 	return (
@@ -74,8 +76,27 @@ export default class AddEntry extends Component {
 		// Clear local notification
 	}
 
+	reset = () => {
+	  const key = timeToString()
+  }
+
   render() {
   	const metaInfo = getMetricMetaInfo()
+
+    if (this.props.alreadyLogged) {
+  	  return (
+  	    <View>
+          <Ionicons
+            name='ios-happy-outline'
+            size={100}
+          />
+          <Text>You already logged your information for today</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+      )
+    }
 
     return (
       <View>
@@ -88,12 +109,12 @@ export default class AddEntry extends Component {
         		<View key={key}>
         			{getIcon()}
         			{type === 'slider'
-        				? <Slider
+        				? <MySlider
         						value={value}
-        						onChabge={(value) => this.slider(key, value)}
+        						onChange={(value) => this.slide(key, value)}
         						{...rest}
         					/>
-        				: <Stepper
+        				: <MyStepper
         						value={value}
         						onIncrement={() => this.increment(key)}
         						onDecrement={() => this.decrement(key)}
