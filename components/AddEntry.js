@@ -10,7 +10,7 @@ import { submitEntry, removeEntry } from '../utils/app'
 import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 
-function SubmitBtn ({ onPress }) {
+function SubmitBtn({ onPress }) {
 	return (
 		<TouchableOpacity
 			onPress={onPress}>
@@ -83,64 +83,64 @@ class AddEntry extends Component {
 
 	reset = () => {
 		const key = timeToString()
-		
+
 		this.props.dispatch(addEntry({
 			[key]: getDailyReminderValue()
 		}))
 
 		removeEntry(key)
-  }
+	}
 
-  render() {
-  	const metaInfo = getMetricMetaInfo()
+	render() {
+		const metaInfo = getMetricMetaInfo()
 
-    if (this.props.alreadyLogged) {
-  	  return (
-  	    <View>
-          <Ionicons
-            name='ios-happy-outline'
-            size={100}
-          />
-          <Text>You already logged your information for today</Text>
-          <TextButton onPress={this.reset}>
-            Reset
+		if (this.props.alreadyLogged) {
+			return (
+				<View>
+					<Ionicons
+						name='ios-happy-outline'
+						size={100}
+					/>
+					<Text>You already logged your information for today</Text>
+					<TextButton onPress={this.reset}>
+						Reset
           </TextButton>
-        </View>
-      )
-    }
+				</View>
+			)
+		}
 
-    return (
-      <View>
-				<DateHeader date={(new Date()).toLocaleDateString()}/>
-        {Object.keys(metaInfo).map((key) => {
-        	const { getIcon, type, ...rest } = metaInfo[key]
-        	const value = this.state[key]
+		return (
+			<View>
+				<DateHeader date={(new Date()).toLocaleDateString()} />
+				{Object.keys(metaInfo).map((key) => {
+					const { getIcon, type, ...rest } = metaInfo[key]
+					const value = this.state[key]
 
-        	return (
-        		<View key={key}>
-        			{getIcon()}
-        			{type === 'slider'
-        				? <MySlider
-        						value={value}
-        						onChange={(value) => this.slide(key, value)}
-        						{...rest}
-        					/>
-        				: <MyStepper
-        						value={value}
-        						onIncrement={() => this.increment(key)}
-        						onDecrement={() => this.decrement(key)}
-        						{...rest}
-        					/>}
-        		</View>
-        	)
+					return (
+						<View key={key}>
+							{getIcon()}
+							{type === 'slider'
+								? <MySlider
+									value={value}
+									onChange={(value) => this.slide(key, value)}
+									{...rest}
+								/>
+								: <MyStepper
+									value={value}
+									onIncrement={() => this.increment(key)}
+									onDecrement={() => this.decrement(key)}
+									{...rest}
+								/>}
+						</View>
+					)
 				})}
-				<SubmitBtn onPress={this.submit}/>
-      </View>
-    ) 
-  }
+				<SubmitBtn onPress={this.submit} />
+			</View>
+		)
+	}
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
 	const key = timeToString()
 
 	return {
