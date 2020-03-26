@@ -1,3 +1,8 @@
+# React Native
+In this course, you'll learn how to to develop React applications that run on both iOS and Android devices. We’ll explore everything from setting up a proper development environment, building and styling a cross-platform mobile application. You’ll incorporate native APIs such as geolocation and local notifications, and even learn how to get your app ready for the Google Play Store and the App Store!
+
+Project: Mobile Flashcards
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
